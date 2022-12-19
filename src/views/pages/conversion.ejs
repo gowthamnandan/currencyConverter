@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Currency Conversion</title>
+    <!-- CSS (load bootstrap from a CDN) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+      body { padding-top:50px; }
+    </style>
+</head>
+<body class="container bg-light">
+<main>
+  <div class="text-center pt-5">
+    <img src="https://i.ibb.co/8cDgdFX/Logo.png" alt="network-logo" width="72" height="72" />
+    <h2>Get Currency Rate</h2>
+      <!-- Start Card -->
+  <div class="card">
+    <!-- Start Card Body -->
+    <div class="card-body">
+    <form action="/getConversion" method="post">
+      <div class="form-row">
+        <!-- Start Input Name -->
+        <div class="form-group col-md-4">
+          <input type="text" class="form-control" id="from_amount" name="from_amount" placeholder="Enter Currency" value="<%= amount %>"required />
+          <small class="form-text text-muted">Please Enter Currency</small>
+        </div>
+        <!-- End Input Name -->
+        
+        <div class="form-group col-md-4">
+        <div class="d-flex flex-row justify-content-between align-items-center">
+          <select class="form-control mr-1" name="from_currency" required>
+            <% currency.forEach((curr) => { 
+              let selectedVal = fromCurrency == curr.code ? "selected" : ""; %>
+              <option value="<%= curr.code %>" <%=selectedVal %> ><%= curr.code %></option>
+              <% }) %>
+            </select>
+        </div>
+        <small class="form-text text-muted">Select Currency</small>
+        </div>
+        <div class="form-group col-md-4">
+        <div class="d-flex flex-row justify-content-between align-items-center">
+          <select class="form-control mr-1" name="to_currency" required>
+              <% currency.forEach((curr) => { 
+                let selectedVal = toCurrency == curr.code ? "selected" : ""; %>
+                <option value="<%= curr.code %>" <%=selectedVal %> ><%= curr.code %></option>
+                <% }) %>
+            </select>
+        </div>
+        <small class="form-text text-muted">Desired Currency</small>
+      </div>
+    </div>
+    <div class="text-center">
+        <h4>The Conversion is </h4>
+        <% if(convertedAmount != "undefined" && convertedAmount) { %>
+          <p><%= convertedAmount %> </p>
+          <% } %>
+    </div>
+    <div class="text-center">
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+      </form>
+    </div></div>
+  </div>
+</main>
+
+<footer>
+    <p class="text-center text-muted">&copy; Copyright 2022 Currency Coverter</p>
+</footer>
+
+</body>
+</html>
